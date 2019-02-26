@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+YTFILE="$HOME/Dropbox/IFTTT/YouTube/New liked video.txt"
+DLDIR=/mnt/raid/files/youtube
+DLFILE=$DLDIR/orig/$(date "+%Y-%m-%d-%H:%M:%S").dl
+
+if [[ -f "$YTFILE" ]]
+then
+  echo Running...
+  mv "$YTFILE" $DLFILE
+  cd $DLDIR
+  pwd
+  /usr/local/bin/youtube-dl -ci -a <(cat $DLFILE| awk '/youtu.be/ {print $(NF)}')
+
+fi
+
+
